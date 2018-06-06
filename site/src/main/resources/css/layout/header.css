@@ -107,6 +107,12 @@ body.sandbox-preview .navbar-fixed-top, body.csr-mode .navbar-fixed-top {
     padding: 15px 0;
 }
 
+.navbar .navbar-nav > li > .account {
+    padding-left: 0;
+    text-decoration: underline;
+    display: inline-block;
+}
+
 /* Type-ahead */
 
 .type-ahead {
