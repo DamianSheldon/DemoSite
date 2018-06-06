@@ -52,8 +52,13 @@ public class LoginController extends BroadleafLoginController {
         return loginView;
     }
 
-    protected RegisterCustomerForm buildRegistrationForm() {
-        RegisterCustomerForm registrationForm = registrationService.initCustomerRegistrationForm();
+    protected RegisterCustomerForm buildRegistrationForm() {       
+    	RegisterCustomerForm superRegistrationForm = registrationService.initCustomerRegistrationForm();
+        
+        // Extend to HCRegisterCustomerForm
+        HCRegisterCustomerForm registrationForm = new HCRegisterCustomerForm();
+        registrationForm.setCustomer(superRegistrationForm.getCustomer());
+        
         registrationService.addRedirectUrlToForm(registrationForm);
 
         return registrationForm;
