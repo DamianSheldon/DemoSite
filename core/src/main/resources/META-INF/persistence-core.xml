@@ -24,7 +24,8 @@
 
     <persistence-unit name="blPU" transaction-type="RESOURCE_LOCAL">
         <non-jta-data-source>jdbc/web</non-jta-data-source>
-        <exclude-unlisted-classes/>
+<!--         <class>com.mycompany.profile.core.domain.HCCustomerImpl</class>
+ -->        <exclude-unlisted-classes/>
     </persistence-unit>
     
     <persistence-unit name="blSecurePU" transaction-type="RESOURCE_LOCAL">
