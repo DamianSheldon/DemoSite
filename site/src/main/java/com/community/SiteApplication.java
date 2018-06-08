@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 
+import com.mycompany.context.HCApplicationEventListener;
+
 @SpringBootApplication
 @EnableAutoConfiguration
 public class SiteApplication {
@@ -15,7 +17,9 @@ public class SiteApplication {
     public static class BroadleafFrameworkConfiguration {}
     
     public static void main(String[] args) {
-        SpringApplication.run(SiteApplication.class, args);
+    	SpringApplication app = new SpringApplication(SiteApplication.class); 
+        app.addListeners(new HCApplicationEventListener());
+        app.run(args);
     }
     
 }
