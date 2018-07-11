@@ -109,6 +109,7 @@ body.sandbox-preview .navbar-fixed-top, body.csr-mode .navbar-fixed-top {
 
 .navbar .navbar-nav > li > .account {
     padding-left: 0;
+    padding-right: 0.5em;
     text-decoration: underline;
     display: inline-block;
 }
