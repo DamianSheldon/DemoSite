@@ -21,6 +21,7 @@ import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 
 import com.community.core.config.CoreConfig;
 import com.community.core.config.StringFactoryBean;
+import com.mycompany.checkout.service.workflow.RecordHeatRangeActivity;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -80,6 +81,11 @@ public class SiteConfig {
         operations.put("thumbnail", thumbnailOperation);
         
         return operations;
+    }
+    
+    @Merge("blCheckoutWorkflowActivities")
+    public List<?> customCheckoutActivities(RecordHeatRangeActivity recordHeatRangeActivity) {
+        return Arrays.asList(recordHeatRangeActivity);
     }
     
     /**
