@@ -38,7 +38,8 @@ import javax.servlet.Filter;
 @Configuration
 @EnableWebSecurity
 @ComponentScan({"org.broadleafcommerce.common.web.security","org.broadleafcommerce.profile.web.core.security",
-	"org.broadleafcommerce.core.web.order.security", "com.mycompany.checkout.service.workflow"})
+	"org.broadleafcommerce.core.web.order.security", "com.mycompany.checkout.service.workflow",
+	"com.mycompany.order.service.workflow.add"})
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
 
