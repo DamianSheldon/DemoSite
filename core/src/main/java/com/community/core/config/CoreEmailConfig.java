@@ -67,13 +67,13 @@ public class CoreEmailConfig {
         return info;
     }
     
-    @Bean
-    public EmailInfo blForgotPasswordEmailInfo() {
-        EmailInfo info = blEmailInfo();
-        info.setSubject("Reset password request");
-        info.setEmailTemplate("resetPassword-email");
-        return info;
-    }
+//    @Bean
+//    public EmailInfo blForgotPasswordEmailInfo() {
+//        EmailInfo info = blEmailInfo();
+//        info.setSubject("Reset password request");
+//        info.setEmailTemplate("resetPassword-email");
+//        return info;
+//    }
     
     @Bean
     public EmailInfo blOrderConfirmationEmailInfo() {

@@ -25,11 +25,5 @@
 			</list>
 		</property>
 	</bean>
-	<bean
-		class="org.broadleafcommerce.common.extensibility.context.merge.LateStageMergeBeanPostProcessor">
-		<property name="sourceRef"
-			value="customAddItemWorkflowActivities" />
-		<property name="targetRef"
-			value="blAddItemWorkflowActivities" />
-	</bean>
+	
 </beans>
