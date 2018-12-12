@@ -5,23 +5,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+import com.community.core.config.CoreEmailConfig;
+
 @Configuration
 @ImportResource("classpath:broadleaf-site-beans-override-config.xml")
 public class BroadleafSiteBeansOverrideConfig {
 
     @Bean
     public EmailInfo blForgotPasswordEmailInfo() {
-        EmailInfo info = emailInfo();
+    	EmailInfo info = CoreEmailConfig.generalEmailInfo();
         info.setSubject("Reset password request");
         info.setEmailTemplate("resetPassword-email");
         return info;
     }
     
-    public EmailInfo emailInfo() {
-        EmailInfo info = new EmailInfo();
-        info.setFromAddress("support@mycompany.com");
-        info.setSendAsyncPriority("2");
-        info.setSendEmailReliableAsync("false");
+    @Bean
+    public EmailInfo blRegistrationEmailInfo() {
+    	EmailInfo info = CoreEmailConfig.generalEmailInfo();
+        info.setSubject("You have successfully registered!");
+        info.setEmailTemplate("register-email");
         return info;
     }
 }

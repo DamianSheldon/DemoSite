@@ -52,20 +52,16 @@ public class CoreEmailConfig {
     
     @Bean
     public EmailInfo blEmailInfo() {
-        EmailInfo info = new EmailInfo();
-        info.setFromAddress("support@mycompany.com");
-        info.setSendAsyncPriority("2");
-        info.setSendEmailReliableAsync("false");
-        return info;
+    	return CoreEmailConfig.generalEmailInfo();
     }
     
-    @Bean
-    public EmailInfo blRegistrationEmailInfo() {
-        EmailInfo info = blEmailInfo();
-        info.setSubject("You have successfully registered!");
-        info.setEmailTemplate("register-email");
-        return info;
-    }
+//    @Bean
+//    public EmailInfo blRegistrationEmailInfo() {
+//    	EmailInfo info = CoreEmailConfig.generalEmailInfo();
+//        info.setSubject("You have successfully registered!");
+//        info.setEmailTemplate("register-email");
+//        return info;
+//    }
     
 //    @Bean
 //    public EmailInfo blForgotPasswordEmailInfo() {
@@ -77,7 +73,7 @@ public class CoreEmailConfig {
     
     @Bean
     public EmailInfo blOrderConfirmationEmailInfo() {
-        EmailInfo info = blEmailInfo();
+    	EmailInfo info = CoreEmailConfig.generalEmailInfo();
         info.setSubject("Your order with The Heat Clinic");
         info.setEmailTemplate("orderConfirmation-email");
         return info;
@@ -85,7 +81,7 @@ public class CoreEmailConfig {
     
     @Bean
     public EmailInfo blFulfillmentOrderTrackingEmailInfo() {
-        EmailInfo info = blEmailInfo();
+    	EmailInfo info = CoreEmailConfig.generalEmailInfo();
         info.setSubject("Your order with The Heat Clinic Has Shipped");
         info.setEmailTemplate("fulfillmentOrderTracking-email");
         return info;
@@ -93,7 +89,7 @@ public class CoreEmailConfig {
     
     @Bean
     public EmailInfo blReturnAuthorizationEmailInfo() {
-        EmailInfo info = blEmailInfo();
+    	EmailInfo info = CoreEmailConfig.generalEmailInfo();
         info.setSubject("Your return with The Heat Clinic");
         info.setEmailTemplate("returnAuthorization-email");
         return info;
@@ -101,9 +97,17 @@ public class CoreEmailConfig {
     
     @Bean
     public EmailInfo blReturnConfirmationEmailInfo() {
-        EmailInfo info = blEmailInfo();
+        EmailInfo info = CoreEmailConfig.generalEmailInfo();
         info.setSubject("Your return with The Heat Clinic");
         info.setEmailTemplate("returnConfirmation-email");
+        return info;
+    }
+    
+    public static EmailInfo generalEmailInfo() {
+    	EmailInfo info = new EmailInfo();
+        info.setFromAddress("support@mycompany.com");
+        info.setSendAsyncPriority("2");
+        info.setSendEmailReliableAsync("false");
         return info;
     }
 }
