@@ -4,6 +4,7 @@ import org.broadleafcommerce.common.security.BroadleafAuthenticationFailureHandl
 import org.broadleafcommerce.common.security.handler.SecurityFilter;
 import org.broadleafcommerce.core.web.order.security.BroadleafAuthenticationSuccessHandler;
 import org.broadleafcommerce.profile.web.site.security.SessionFixationProtectionFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -24,6 +25,8 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.session.SessionManagementFilter;
 
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.Filter;
+import javax.sql.DataSource;
 
 /**
  * @author Elbert Bautista (elbertbautista)
@@ -96,6 +100,10 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource(name="blPasswordEncoder")
     protected PasswordEncoder passwordEncoder;
 
+    @Autowired
+    @Qualifier("webDS")
+    DataSource webDS;
+    
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
@@ -119,6 +127,13 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
+    private PersistentTokenRepository tokenRepository() {
+    	JdbcTokenRepositoryImpl jdbcTokenRepo = new JdbcTokenRepositoryImpl();
+    	jdbcTokenRepo.setDataSource(webDS);
+
+    	return jdbcTokenRepo;
+    }
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -149,6 +164,10 @@ public class SiteSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("ActiveID")
                 .logoutUrl("/logout")
                 .and()
+            .rememberMe()
+            	.key("SiteAppKey")
+            	.tokenRepository(tokenRepository())
+            	.and()
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(sessionFixationProtectionFilter, SessionManagementFilter.class);
     }

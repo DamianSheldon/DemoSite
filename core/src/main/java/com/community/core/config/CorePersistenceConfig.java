@@ -65,4 +65,10 @@ public class CorePersistenceConfig {
     public AutoImportSql blPrivateDemoCustomerData() {
     	return new AutoImportSql(AutoImportPersistenceUnit.BL_PU,"/sql/prepopulate_customers.sql", AutoImportStage.PRIMARY_LATE);
     }
+    
+    @Bean
+    @ConditionalOnResource(resources = "classpath:/sql/prepare_persistent_logins_table.sql")
+    public AutoImportSql blPersistentLoginData() {
+    	return new AutoImportSql(AutoImportPersistenceUnit.BL_PU,"/sql/prepare_persistent_logins_table.sql", AutoImportStage.PRIMARY_LATE);
+    }
 }
