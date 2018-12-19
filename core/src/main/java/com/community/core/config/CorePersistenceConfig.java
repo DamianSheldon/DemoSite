@@ -7,6 +7,7 @@ import org.broadleafcommerce.common.extensibility.context.merge.Merge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.MapFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +68,7 @@ public class CorePersistenceConfig {
     }
     
     @Bean
+    @ConditionalOnBean(name={"blEmbeddedDatabase"})
     @ConditionalOnResource(resources = "classpath:/sql/prepare_persistent_logins_table.sql")
     public AutoImportSql blPersistentLoginData() {
     	return new AutoImportSql(AutoImportPersistenceUnit.BL_PU,"/sql/prepare_persistent_logins_table.sql", AutoImportStage.PRIMARY_LATE);
